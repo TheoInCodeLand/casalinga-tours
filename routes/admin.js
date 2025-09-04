@@ -163,4 +163,95 @@ router.post('/bookings/:id/status', requireAdmin, (req, res) => {
     );
 });
 
+// GET - View All Users
+router.get('/users', requireAdmin, (req, res) => {
+    const query = 'SELECT * FROM users ORDER BY created_at DESC';
+    
+    db.all(query, [], (err, users) => {
+        if (err) {
+            console.error(err);
+            users = [];
+        }
+        res.render('admin/users', { 
+            title: 'User Management - Casalinga Tours', 
+            users 
+        });
+    });
+});
+
+// POST - Make User Admin
+router.post('/users/:id/make-admin', requireAdmin, (req, res) => {
+    const userId = req.params.id;
+    
+    db.run(
+        'UPDATE users SET role = ? WHERE id = ?',
+        ['admin', userId],
+        function(err) {
+            if (err) {
+                console.error(err);
+                req.session.message = { type: 'error', text: 'Failed to update user role.' };
+            } else {
+                req.session.message = { type: 'success', text: 'User role updated to admin successfully!' };
+            }
+            res.redirect('/admin/users');
+        }
+    );
+});
+
+// POST - Delete User
+router.post('/users/:id/delete', requireAdmin, (req, res) => {
+    const userId = req.params.id;
+    
+    // Prevent admin from deleting themselves
+    if (parseInt(userId) === req.session.userId) {
+        req.session.message = { type: 'error', text: 'You cannot delete your own account.' };
+        return res.redirect('/admin/users');
+    }
+    
+    db.run('DELETE FROM users WHERE id = ?', [userId], function(err) {
+        if (err) {
+            console.error(err);
+            req.session.message = { type: 'error', text: 'Failed to delete user.' };
+        } else {
+            req.session.message = { type: 'success', text: 'User deleted successfully!' };
+        }
+        res.redirect('/admin/users');
+    });
+});
+
+// GET - View User Details (optional - if you want a detailed view)
+router.get('/users/:id', requireAdmin, (req, res) => {
+    const userId = req.params.id;
+    
+    const userQuery = 'SELECT * FROM users WHERE id = ?';
+    const bookingsQuery = `
+        SELECT b.*, t.title as tour_title 
+        FROM bookings b 
+        JOIN tours t ON b.tour_id = t.id 
+        WHERE b.user_id = ? 
+        ORDER BY b.created_at DESC
+    `;
+    
+    db.get(userQuery, [userId], (err, user) => {
+        if (err || !user) {
+            console.error(err);
+            req.session.message = { type: 'error', text: 'User not found.' };
+            return res.redirect('/admin/users');
+        }
+        
+        db.all(bookingsQuery, [userId], (err, userBookings) => {
+            if (err) {
+                console.error(err);
+                userBookings = [];
+            }
+            
+            res.render('admin/user-detail', {
+                title: 'User Details - Casalinga Tours',
+                user,
+                bookings: userBookings
+            });
+        });
+    });
+});
+
 module.exports = router;

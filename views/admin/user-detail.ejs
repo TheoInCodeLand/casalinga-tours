@@ -1,0 +1,55 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="admin-header">
+        <h1>User Details</h1>
+        <a href="/admin/users" class="btn btn-secondary">Back to Users</a>
+    </div>
+
+    <div class="user-detail-card">
+        <h2><%= user.name %></h2>
+        <div class="user-info">
+            <p><strong>Email:</strong> <%= user.email %></p>
+            <p><strong>Role:</strong> <span class="role-badge <%= user.role %>"><%= user.role %></span></p>
+            <p><strong>Member Since:</strong> <%= new Date(user.created_at).toLocaleDateString() %></p>
+            <p><strong>User ID:</strong> #<%= user.id %></p>
+        </div>
+
+        <% if (user.role !== 'admin') { %>
+            <div class="user-actions">
+                <form action="/admin/users/<%= user.id %>/make-admin" method="POST">
+                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Make this user an admin?')">
+                        Make Admin
+                    </button>
+                </form>
+                <form action="/admin/users/<%= user.id %>/delete" method="POST">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this user? This action cannot be undone.')">
+                        Delete User
+                    </button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="user-bookings">
+        <h2>Booking History</h2>
+        <% if (bookings.length > 0) { %>
+            <div class="bookings-list">
+                <% bookings.forEach(function(booking) { %>
+                    <div class="booking-item">
+                        <h3><%= booking.tour_title %></h3>
+                        <p><strong>Status:</strong> <span class="status-<%= booking.status %>"><%= booking.status %></span></p>
+                        <p><strong>Date:</strong> <%= new Date(booking.booking_date).toLocaleDateString() %></p>
+                        <p><strong>Participants:</strong> <%= booking.participants %></p>
+                        <p><strong>Booked On:</strong> <%= new Date(booking.created_at).toLocaleDateString() %></p>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>This user has no bookings yet.</p>
+        <% } %>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
