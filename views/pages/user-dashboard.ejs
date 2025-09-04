@@ -1,0 +1,55 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="page-header">
+        <h1>Welcome, <%= user.name %>!</h1>
+        <p>Your wellness journey dashboard</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h2>Quick Actions</h2>
+            <div class="action-buttons">
+                <a href="/tours" class="btn btn-primary">Browse Tours</a>
+                <a href="/bookings/my-bookings" class="btn btn-secondary">My Bookings</a>
+                <a href="/contact" class="btn btn-outline">Contact Support</a>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Recent Bookings</h2>
+            <% if (recentBookings.length > 0) { %>
+                <div class="recent-bookings">
+                    <% recentBookings.slice(0, 3).forEach(function(booking) { %>
+                        <div class="recent-booking-item">
+                            <h3><%= booking.tour_title %></h3>
+                            <p>Status: <span class="status-<%= booking.status %>"><%= booking.status %></span></p>
+                            <p>Date: <%= new Date(booking.booking_date).toLocaleDateString() %></p>
+                            <a href="/bookings/my-bookings" class="btn btn-small">View Details</a>
+                        </div>
+                    <% }); %>
+                </div>
+                <% if (recentBookings.length > 3) { %>
+                    <a href="/bookings/my-bookings" class="btn btn-link">View All Bookings</a>
+                <% } %>
+            <% } else { %>
+                <p>No recent bookings. <a href="/tours">Explore our tours</a> to get started.</p>
+            <% } %>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Account Information</h2>
+            <div class="account-info">
+                <p><strong>Name:</strong> <%= user.name %></p>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Member Since:</strong> <%= new Date(user.created_at).toLocaleDateString() %></p>
+            </div>
+            <div class="account-actions">
+                <a href="/auth/logout" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

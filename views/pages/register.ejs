@@ -1,0 +1,45 @@
+<!-- views/pages/register.ejs - UPDATED -->
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="auth-form">
+        <h1>Create Your Account</h1>
+        <p>Join us to book wellness experiences and manage your bookings</p>
+        
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
+        
+        <form action="/auth/register" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required value="<%= typeof name !== 'undefined' ? name : '' %>">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required value="<%= typeof email !== 'undefined' ? email : '' %>">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" required minlength="6">
+                <small>Must be at least 6 characters long</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </form>
+        
+        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

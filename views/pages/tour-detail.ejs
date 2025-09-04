@@ -1,0 +1,69 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <% if (tour) { %>
+        <div class="tour-detail">
+            <div class="tour-header">
+                <h1><%= tour.title %></h1>
+                <p class="tour-category"><%= tour.category %></p>
+            </div>
+
+            <div class="tour-content">
+                <div class="tour-image">
+                    <img src="<%= tour.image_url || '/images/tour-default.jpg' %>" alt="<%= tour.title %>">
+                </div>
+
+                <div class="tour-info">
+                    <div class="tour-meta">
+                        <div class="meta-item">
+                            <span class="label">Price:</span>
+                            <span class="value">R<%= tour.price %> per person</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Duration:</span>
+                            <span class="value"><%= tour.duration %></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Availability:</span>
+                            <span class="value <%= tour.available ? 'available' : 'unavailable' %>">
+                                <%= tour.available ? 'Available' : 'Fully Booked' %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="tour-description">
+                        <h2>Experience Overview</h2>
+                        <p><%= tour.description %></p>
+                        
+                        <% if (tour.detailed_description) { %>
+                            <h2>Detailed Itinerary</h2>
+                            <p><%= tour.detailed_description %></p>
+                        <% } %>
+                    </div>
+
+                    <div class="tour-actions">
+                        <% if (tour.available) { %>
+                            <% if (user.isAuthenticated) { %>
+                                <a href="/bookings/new?tour_id=<%= tour.id %>" class="btn btn-primary btn-large">Book This Tour</a>
+                            <% } else { %>
+                                <a href="/auth/login?returnTo=/tours/<%= tour.id %>" class="btn btn-primary btn-large">Login to Book</a>
+                            <% } %>
+                        <% } else { %>
+                            <button class="btn btn-disabled" disabled>Currently Unavailable</button>
+                        <% } %>
+                        <a href="/tours" class="btn btn-secondary">Back to Tours</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="error-message">
+            <h2>Tour Not Found</h2>
+            <p>The tour you're looking for doesn't exist or has been removed.</p>
+            <a href="/tours" class="btn btn-primary">Browse All Tours</a>
+        </div>
+    <% } %>
+</main>
+
+<%- include('../partials/footer') %>

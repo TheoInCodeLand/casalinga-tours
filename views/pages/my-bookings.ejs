@@ -1,0 +1,72 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="page-header">
+        <h1>My Bookings</h1>
+        <p>Manage your wellness journey bookings</p>
+    </div>
+
+    <% if (bookings.length > 0) { %>
+        <div class="bookings-list">
+            <% bookings.forEach(function(booking) { %>
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <h2><%= booking.tour_title %></h2>
+                        <span class="booking-status status-<%= booking.status %>">
+                            <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                        </span>
+                    </div>
+                    
+                    <div class="booking-details">
+                        <div class="detail-item">
+                            <strong>Booking Date:</strong> 
+                            <%= new Date(booking.booking_date).toLocaleDateString() %>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Participants:</strong> 
+                            <%= booking.participants %> person(s)
+                        </div>
+                        <div class="detail-item">
+                            <strong>Total Amount:</strong> 
+                            R<%= (booking.tour_price * booking.participants).toFixed(2) %>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Booked On:</strong> 
+                            <%= new Date(booking.created_at).toLocaleDateString() %>
+                        </div>
+                        
+                        <% if (booking.special_requests) { %>
+                            <div class="detail-item">
+                                <strong>Special Requests:</strong> 
+                                <%= booking.special_requests %>
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <div class="booking-actions">
+                        <% if (booking.status === 'pending') { %>
+                            <span class="info-text">Waiting for confirmation</span>
+                        <% } else if (booking.status === 'confirmed') { %>
+                            <a href="/payments/new?booking_id=<%= booking.id %>" class="btn btn-primary">
+                                Proceed to Payment
+                            </a>
+                        <% } else if (booking.status === 'completed') { %>
+                            <span class="success-text">Booking Completed</span>
+                        <% } else if (booking.status === 'cancelled') { %>
+                            <span class="error-text">Booking Cancelled</span>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="empty-state">
+            <h2>No Bookings Yet</h2>
+            <p>You haven't made any bookings yet. Start your wellness journey by exploring our tours.</p>
+            <a href="/tours" class="btn btn-primary">Browse Tours</a>
+        </div>
+    <% } %>
+</main>
+
+<%- include('../partials/footer') %>

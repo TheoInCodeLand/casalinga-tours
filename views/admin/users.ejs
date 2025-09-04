@@ -1,0 +1,60 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="admin-header">
+        <h1>User Management</h1>
+        <p>Manage registered users and their permissions</p>
+    </div>
+
+    <% if (users.length > 0) { %>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Joined</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(function(user) { %>
+                        <tr>
+                            <td>#<%= user.id %></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <td>
+                                <span class="role-badge <%= user.role %>">
+                                    <%= user.role %>
+                                </span>
+                            </td>
+                            <td><%= new Date(user.created_at).toLocaleDateString() %></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <% if (user.role !== 'admin') { %>
+                                        <form action="/admin/users/<%= user.id %>/make-admin" method="POST" style="display: inline;">
+                                            <button type="submit" class="btn btn-small btn-secondary" onclick="return confirm('Make this user an admin?')">Make Admin</button>
+                                        </form>
+                                    <% } %>
+                                    <form action="/admin/users/<%= user.id %>/delete" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Delete this user?')">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <div class="empty-state">
+            <h2>No Users Found</h2>
+            <p>There are no registered users in the system yet.</p>
+        </div>
+    <% } %>
+</main>
+
+<%- include('../partials/footer') %>

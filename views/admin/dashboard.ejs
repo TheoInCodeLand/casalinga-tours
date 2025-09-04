@@ -1,0 +1,103 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome back, <%= session.userName %>! Here's your overview.</p>
+    </div>
+
+    <div class="admin-stats">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+                <h3><%= stats.totalBookings %></h3>
+                <p>Total Bookings</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-content">
+                <h3><%= stats.pendingBookings %></h3>
+                <p>Pending Bookings</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-content">
+                <h3><%= stats.totalTours %></h3>
+                <p>Active Tours</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+                <h3><%= stats.totalUsers %></h3>
+                <p>Registered Users</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-grid">
+            <a href="/admin/tours" class="action-card">
+                <div class="action-icon">➕</div>
+                <h3>Manage Tours</h3>
+                <p>Add, edit, or remove tours</p>
+            </a>
+            
+            <a href="/admin/bookings" class="action-card">
+                <div class="action-icon">📋</div>
+                <h3>View Bookings</h3>
+                <p>Manage all bookings</p>
+            </a>
+            
+            <a href="/admin/tours/new" class="action-card">
+                <div class="action-icon">✨</div>
+                <h3>Create New Tour</h3>
+                <p>Add a new experience</p>
+            </a>
+            
+            <a href="/admin/users" class="action-card">
+                <div class="action-icon">👥</div>
+                <h3>User Management</h3>
+                <p>View registered users</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="recent-activity">
+        <h2>Recent Activity</h2>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-icon">✅</div>
+                <div class="activity-content">
+                    <p><strong>New booking</strong> received for Wellness Retreat</p>
+                    <small>2 minutes ago</small>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">👤</div>
+                <div class="activity-content">
+                    <p><strong>New user</strong> registered: john@example.com</p>
+                    <small>1 hour ago</small>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">📧</div>
+                <div class="activity-content">
+                    <p><strong>Contact form</strong> submission from Sarah</p>
+                    <small>3 hours ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

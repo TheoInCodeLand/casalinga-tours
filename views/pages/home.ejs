@@ -1,0 +1,56 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>Transformative Wellness Journeys</h1>
+            <p>Experience travel that nourishes your body, soul, and spirit</p>
+            <a href="/tours" class="cta-button">Explore Our Tours</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Casalinga Tours</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Mental Health Focus</h3>
+                    <p>Founded by healthcare professionals with 9+ years in mental health experience</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Diverse Experiences</h3>
+                    <p>From bush camps to corporate team building and wellness retreats</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Fully Certified</h3>
+                    <p>Registered with CIPC: 2021/786808/07</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-tours">
+        <div class="container">
+            <h2>Popular Tours</h2>
+            <div class="tour-grid">
+                <% tours.forEach(function(tour) { %>
+                    <div class="tour-card">
+                        <h3><%= tour.title %></h3>
+                        <p class="tour-description"><%= tour.description %></p>
+                        <div class="tour-details">
+                            <span class="price">R<%= tour.price %></span>
+                            <span class="duration"><%= tour.duration %></span>
+                        </div>
+                        <a href="/tours/<%= tour.id %>" class="btn">View Details</a>
+                    </div>
+                <% }); %>
+            </div>
+            <div class="center">
+                <a href="/tours" class="cta-button">View All Tours</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,75 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <div class="admin-header">
+        <h1><%= tour ? 'Edit Tour' : 'Create New Tour' %></h1>
+        <a href="/admin/tours" class="btn btn-secondary">Back to Tours</a>
+    </div>
+
+    <form action="<%= tour ? '/admin/tours/' + tour.id : '/admin/tours' %>" method="POST" class="admin-form">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="title">Tour Title *</label>
+                <input type="text" id="title" name="title" required value="<%= tour ? tour.title : '' %>">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Retreat" <%= tour && tour.category === 'Retreat' ? 'selected' : '' %>>Wellness Retreat</option>
+                    <option value="Corporate" <%= tour && tour.category === 'Corporate' ? 'selected' : '' %>>Corporate Event</option>
+                    <option value="Adventure" <%= tour && tour.category === 'Adventure' ? 'selected' : '' %>>Adventure</option>
+                    <option value="Picnic" <%= tour && tour.category === 'Picnic' ? 'selected' : '' %>>Picnic</option>
+                    <option value="Bush Camp" <%= tour && tour.category === 'Bush Camp' ? 'selected' : '' %>>Bush Camp</option>
+                    <option value="Mental Health" <%= tour && tour.category === 'Mental Health' ? 'selected' : '' %>>Mental Health Event</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price (R) *</label>
+                <input type="number" id="price" name="price" step="0.01" min="0" required value="<%= tour ? tour.price : '' %>">
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration *</label>
+                <input type="text" id="duration" name="duration" placeholder="e.g., 3 Days / 2 Nights" required value="<%= tour ? tour.duration : '' %>">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="description">Short Description *</label>
+                <textarea id="description" name="description" rows="3" required><%= tour ? tour.description : '' %></textarea>
+                <small>This appears on tour listing pages (max 200 characters)</small>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="detailed_description">Detailed Description</label>
+                <textarea id="detailed_description" name="detailed_description" rows="6"><%= tour ? tour.detailed_description : '' %></textarea>
+                <small>Full itinerary and details for the tour page</small>
+            </div>
+
+            <div class="form-group">
+                <label for="image_url">Image URL</label>
+                <input type="url" id="image_url" name="image_url" placeholder="https://example.com/image.jpg" value="<%= tour ? tour.image_url : '' %>">
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="available" <%= tour && tour.available ? 'checked' : 'checked' %>>
+                    <span class="checkmark"></span>
+                    Available for booking
+                </label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="/admin/tours" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">
+                <%= tour ? 'Update Tour' : 'Create Tour' %>
+            </button>
+        </div>
+    </form>
+</main>
+
+<%- include('../partials/footer') %>
