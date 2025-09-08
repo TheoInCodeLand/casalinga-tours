@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Add any additional CSS or font imports here -->
+    <% if (typeof process.env.GOOGLE_MAPS_API_KEY !== 'undefined' && 'AIzaSyBLkzLyjTwNwEJdUL5LQkIsnE0Hm3JvtlA') { %>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLkzLyjTwNwEJdUL5LQkIsnE0Hm3JvtlA&loading=async&libraries=places&callback=initMapsCallback"></script>
+        <script>
+            // Global callback function
+            function initMapsCallback() {
+                console.log('Google Maps API loaded successfully');
+                window.mapsLoaded = true;
+                
+                // Trigger custom event for other scripts
+                document.dispatchEvent(new Event('google-maps-loaded'));
+            }
+            
+            // Error handling for Maps API
+            window.gm_authFailure = function() {
+                console.error('Google Maps authentication failed. Please check your API key.');
+                document.dispatchEvent(new Event('google-maps-error'));
+            };
+        </script>
+    <% } else { %>
+        <script>
+            console.error('Google Maps API key not configured');
+            document.dispatchEvent(new Event('google-maps-error'));
+        </script>
+    <% } %>
+    
+    <!-- Your custom maps JS -->
+    <script src="/js/maps.js" defer></script>
 </head>
 <body>

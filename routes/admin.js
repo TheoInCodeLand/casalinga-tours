@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/init');
 const { requireAdmin } = require('../middleware/auth');
+const GeocodingService = require('../services/geocoding');
+const geocodingService = new GeocodingService(process.env.GOOGLE_MAPS_API_KEY);
 
 // GET - Admin Dashboard
 router.get('/dashboard', requireAdmin, (req, res) => {
@@ -34,6 +36,21 @@ router.get('/dashboard', requireAdmin, (req, res) => {
     });
 });
 
+router.post('/api/geocode', requireAdmin, async (req, res) => {
+    const { address } = req.body;
+    
+    if (!address) {
+        return res.json({ success: false, error: 'Address is required' });
+    }
+
+    try {
+        const result = await geocodingService.geocodeAddress(address);
+        res.json(result);
+    } catch (error) {
+        res.json({ success: false, error: error.message });
+    }
+});
+
 // GET - Manage Tours
 router.get('/tours', requireAdmin, (req, res) => {
     db.all('SELECT * FROM tours ORDER BY created_at DESC', [], (err, tours) => {
@@ -57,21 +74,18 @@ router.get('/tours/new', requireAdmin, (req, res) => {
 });
 
 // POST - Create New Tour
-router.post('/tours', requireAdmin, (req, res) => {
-    const { title, description, detailed_description, price, duration, category, available } = req.body;
+router.post('/tours', requireAdmin, async (req, res) => {
+    const { title, description, detailed_description, price, duration, category, available, address, latitude, longitude } = req.body;
     
     db.run(
-        `INSERT INTO tours (title, description, detailed_description, price, duration, category, available) 
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [title, description, detailed_description, price, duration, category, available ? 1 : 0],
+        `INSERT INTO tours (title, description, detailed_description, price, duration, category, available, address, latitude, longitude) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [title, description, detailed_description, price, duration, category, available ? 1 : 0, address, latitude, longitude],
         function(err) {
             if (err) {
                 console.error(err);
                 req.session.message = { type: 'error', text: 'Failed to create tour.' };
-                return res.render('admin/tour-form', { 
-                    title: 'Add New Tour - Casalinga Tours',
-                    tour: null
-                });
+                return res.redirect('/admin/tours/new');
             }
             
             req.session.message = { type: 'success', text: 'Tour created successfully!' };
@@ -99,15 +113,15 @@ router.get('/tours/:id/edit', requireAdmin, (req, res) => {
 });
 
 // POST - Update Tour
-router.post('/tours/:id', requireAdmin, (req, res) => {
+router.post('/tours/:id', requireAdmin, async (req, res) => {
     const tourId = req.params.id;
-    const { title, description, detailed_description, price, duration, category, available } = req.body;
+    const { title, description, detailed_description, price, duration, category, available, address, latitude, longitude } = req.body;
     
     db.run(
         `UPDATE tours 
-         SET title = ?, description = ?, detailed_description = ?, price = ?, duration = ?, category = ?, available = ?
+         SET title = ?, description = ?, detailed_description = ?, price = ?, duration = ?, category = ?, available = ?, address = ?, latitude = ?, longitude = ?
          WHERE id = ?`,
-        [title, description, detailed_description, price, duration, category, available ? 1 : 0, tourId],
+        [title, description, detailed_description, price, duration, category, available ? 1 : 0, address, latitude, longitude, tourId],
         function(err) {
             if (err) {
                 console.error(err);
@@ -253,5 +267,7 @@ router.get('/users/:id', requireAdmin, (req, res) => {
         });
     });
 });
+
+
 
 module.exports = router;

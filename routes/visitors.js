@@ -82,6 +82,13 @@ router.get('/blog', (req, res) => {
     res.render('pages/blog', { title: 'Blog & Resources - Casalinga Tours' });
 });
 
+// GET - Maps Debug Page
+router.get('/maps-debug', (req, res) => {
+    res.render('pages/maps-debug', { 
+        title: 'Maps Debug - Casalinga Tours' 
+    });
+});
+
 router.get('/user/dashboard', requireAuth, (req, res) => {
     const userId = req.session.userId;
     

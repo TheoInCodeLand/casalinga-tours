@@ -1,0 +1,78 @@
+<%- include('../partials/head', { title: 'Maps Debug - Casalinga Tours' }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <h1>Google Maps Debug</h1>
+    
+    <div class="debug-section">
+        <h2>API Key Status</h2>
+        <p><strong>API Key Present:</strong> <%= typeof process.env.GOOGLE_MAPS_API_KEY !== 'undefined' ? 'Yes' : 'No' %></p>
+        <p><strong>API Key Length:</strong> <%= typeof process.env.GOOGLE_MAPS_API_KEY !== 'undefined' ? process.env.GOOGLE_MAPS_API_KEY.length : 'N/A' %></p>
+        <p><strong>API Key Starts With:</strong> <%= typeof process.env.GOOGLE_MAPS_API_KEY !== 'undefined' ? process.env.GOOGLE_MAPS_API_KEY.substring(0, 10) + '...' : 'N/A' %></p>
+    </div>
+
+    <div class="debug-section">
+        <h2>Test Map</h2>
+        <div id="test-map" style="height: 400px; width: 100%; border: 2px solid #ccc;"></div>
+    </div>
+
+    <div class="debug-section">
+        <h2>JavaScript Console</h2>
+        <button onclick="testMaps()" class="btn btn-primary">Test Maps API</button>
+        <button onclick="checkGoogle()" class="btn btn-secondary">Check Google Object</button>
+        <div id="console-output" style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 5px; min-height: 100px;"></div>
+    </div>
+</main>
+
+<script>
+function logToConsole(message) {
+    const consoleDiv = document.getElementById('console-output');
+    consoleDiv.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+    console.log(message);
+}
+
+function checkGoogle() {
+    if (typeof google === 'undefined') {
+        logToConsole('❌ Google object is undefined');
+    } else {
+        logToConsole('✅ Google object is defined');
+        if (typeof google.maps === 'undefined') {
+            logToConsole('❌ google.maps is undefined');
+        } else {
+            logToConsole('✅ google.maps is defined');
+        }
+    }
+}
+
+function testMaps() {
+    try {
+        if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+            logToConsole('❌ Google Maps API not loaded');
+            return;
+        }
+
+        const map = new google.maps.Map(document.getElementById('test-map'), {
+            center: { lat: -33.9249, lng: 18.4241 },
+            zoom: 12
+        });
+
+        new google.maps.Marker({
+            position: { lat: -33.9249, lng: 18.4241 },
+            map: map,
+            title: 'Test Location'
+        });
+
+        logToConsole('✅ Map created successfully!');
+    } catch (error) {
+        logToConsole(`❌ Error: ${error.message}`);
+    }
+}
+
+// Run checks on page load
+document.addEventListener('DOMContentLoaded', function() {
+    logToConsole('Page loaded');
+    checkGoogle();
+});
+</script>
+
+<%- include('../partials/footer') %>

@@ -52,6 +52,15 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    res.locals.process = {
+        env: {
+            GOOGLE_MAPS_API_KEY: 'AIzaSyBLkzLyjTwNwEJdUL5LQkIsnE0Hm3JvtlA'
+        }
+    };
+    next();
+});
+
 // ===== USE ROUTES =====
 app.use('/', visitorRoutes);
 app.use('/auth', authRoutes);

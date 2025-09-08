@@ -42,6 +42,40 @@
                         <% } %>
                     </div>
 
+                    <% if (tour.latitude && tour.longitude) { %>
+                        <div class="tour-map-section">
+                            <h2>Location</h2>
+                            <div class="map-container">
+                                <div id="tour-map-<%= tour.id %>" class="tour-map"></div>
+                            </div>
+                            <p class="map-address">
+                                <strong>Address:</strong> <%= tour.address %>
+                            </p>
+                        </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                // Initialize map when page loads
+                                if (typeof google !== 'undefined') {
+                                    const maps = new CasalingaMaps('<%= process.env.GOOGLE_MAPS_API_KEY %>');
+                                    maps.initMap(
+                                        'tour-map-<%= tour.id %>',
+                                        '<%= tour.latitude %>',
+                                        '<%= tour.longitude %>',
+                                        '<%= tour.title %>',
+                                        '<%= tour.address %>'
+                                    );
+                                }
+                            });
+                        </script>
+                    <% } %>
+                    <div id="tour-map-123" 
+                        data-lat="-33.9249" 
+                        data-lng="18.4241" 
+                        data-title="Table Mountain Tour" 
+                        data-address="Table Mountain, Cape Town">
+                    </div>
+
                     <div class="tour-actions">
                         <% if (tour.available) { %>
                             <% if (user.isAuthenticated) { %>
