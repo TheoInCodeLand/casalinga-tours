@@ -31,7 +31,7 @@
     <nav>
       <div class="nav__header">
         <div class="nav__logo" >
-          <a href="#" style="display: flex; align-items: center; "><img src="/assets/logo_no_bg.png" alt="" style="width: 3rem;">Casalinga<span>Tours</span></a>
+          <a href="#" style="display: flex; align-items: center;"><span><img src="/assets/logo_no_bg.png" alt="" style="width: 4rem;"></span>Casalinga<span>Tours</span></a>
         </div>
         <div class="nav__menu__btn" id="menu-btn">
           <i class="ri-menu-3-line"></i>
@@ -41,14 +41,13 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#package">Destinations</a></li>
-        <li><a href="#contact">Tours & Safaris</a></li>
-        <li><a href="#contact">Blog</a></li>
+        <li><a href="/tours">Tours & Safaris</a></li>
+        <li><a href="/blog">Blog</a></li>
       </ul>
       <div class="nav__btns">
-        <button class="btn">Login</button>
+        <button class="btn"><a href="/auth/login">Login</a></button>
       </div>
     </nav>
-
     <header class="section__container header__container" id="home">
       <div class="header__content">
         <h1><span>Wellness</span> Travel Body . Mind . Spirit </h1>
@@ -79,7 +78,6 @@
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" />
       </div>
     </header>
-
     <section class="section__container choose__container" id="about">
       <div class="choose__image">
         <img src="/assets/hiking.jpg" alt="choose" />
@@ -121,7 +119,6 @@
         </ul>
       </div>
     </section>
-
     <section class="section__container popular__container" id="package">
       <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" class="popular__bg" />
       <p class="section__subheader">Famous Tours</p>
@@ -138,29 +135,52 @@
                 <div class="popular__content">
                   <div class="popular__rating">
                     <span><i class="ri-star-line"></i></span>
-                    4.0(34) Reviews
+                    4.0(34 Reviews) 
                   </div>
-                  <h4>Lakshadweep</h4>
-                  <p><span>R 28,000/-</span> Per Person</p>
+                  <h4><%= tour.title %></h4>
+                  <p><span>R <%= tour.price %>/-</span> Per Person</p>
                   <div class="popular__card__footer">
                     <div>
-                      <span><i class="ri-time-line"></i></span> 4 Day's
+                      <span><i class="ri-time-line"></i></span> <%= tour.duration %>
                     </div>
                     <!-- <div>
                       <span><i class="ri-group-3-line"></i></span> 15+
                     </div> -->
                     <div>
-                      <span><i class="ri-map-pin-2-line"></i></span> Bushbugridge 
+                      <span><i class="ri-map-pin-2-line"></i></span> <%= tour.category %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           <% }); %>
+          <div class="swiper-slide">
+            <div class="popular__card">
+              <img src="https://mhondoro.com/wp-content/uploads/2024/09/Safaris_Resized.webp" alt="popular" />
+              <div class="popular__content">
+                <div class="popular__rating">
+                  <span><i class="ri-star-line"></i></span>
+                  4.0(34) Reviews
+                </div>
+                <h4>Lakshadweep</h4>
+                <p><span>R 28,000/-</span> Per Person</p>
+                <div class="popular__card__footer">
+                  <div>
+                    <span><i class="ri-time-line"></i></span> 4 Day's
+                  </div>
+                  <!-- <div>
+                    <span><i class="ri-group-3-line"></i></span> 15+
+                  </div> -->
+                  <div>
+                    <span><i class="ri-map-pin-2-line"></i></span> Bushbugridge 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-
     <section class="section__container explore__container">
       <div class="explore__image">
         <img src="/assets/waterfall.jpg" alt="explore" />

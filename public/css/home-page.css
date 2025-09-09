@@ -141,6 +141,10 @@ nav {
   display: none;
 }
 
+.nav__btns a {
+  color: white;
+}
+
 .header__container {
   display: grid;
   gap: 2rem;

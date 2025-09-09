@@ -1,19 +1,17 @@
-// routes/visitors.js
 const express = require('express');
 const router = express.Router();
-const db = require('../database/init'); // Import our database
+const db = require('../database/init');
 const { requireAuth } = require('../middleware/auth');
 
 // GET - Homepage
 router.get('/', (req, res) => {
-    const query = `SELECT * FROM tours WHERE available = 1 LIMIT 3`;
+    const query = `SELECT * FROM tours WHERE available = 1 LIMIT 6`;
     
     db.all(query, [], (err, tours) => {
         if (err) {
             console.error(err);
             tours = []; // If there's an error, set tours to empty array
         }
-        // Render the homepage and pass the tours data to the EJS template
         res.render('pages/home', { title: 'Casalinga Tours - Home', tours });
     });
 });
