@@ -1,56 +1,341 @@
-<%- include('../partials/head', { title: title }) %>
-<%- include('../partials/header') %>
-
-<main>
-    <section class="hero">
-        <div class="container">
-            <h1>Transformative Wellness Journeys</h1>
-            <p>Experience travel that nourishes your body, soul, and spirit</p>
-            <a href="/tours" class="cta-button">Explore Our Tours</a>
+<% tours.forEach(function(tour) { %>
+    <!-- <div class="tour-card">
+        <h3><%= tour.title %></h3>
+        <p class="tour-description"><%= tour.description %></p>
+        <div class="tour-details">
+            <span class="price">R<%= tour.price %></span>
+            <span class="duration"><%= tour.duration %></span>
         </div>
-    </section>
+        <a href="/tours/<%= tour.id %>" class="btn">View Details</a>
+    </div> -->
+<% }); %>
 
-    <section class="features">
-        <div class="container">
-            <h2>Why Choose Casalinga Tours</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Mental Health Focus</h3>
-                    <p>Founded by healthcare professionals with 9+ years in mental health experience</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Diverse Experiences</h3>
-                    <p>From bush camps to corporate team building and wellness retreats</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Fully Certified</h3>
-                    <p>Registered with CIPC: 2021/786808/07</p>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="/css/home-page.css" />
+    <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
+    <title>Casalinga Tours | Wellness Travel Body.Mind.Spirit</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo" >
+          <a href="#" style="display: flex; align-items: center; "><img src="/assets/logo_no_bg.png" alt="" style="width: 3rem;">Casalinga<span>Tours</span></a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#package">Destinations</a></li>
+        <li><a href="#contact">Tours & Safaris</a></li>
+        <li><a href="#contact">Blog</a></li>
+      </ul>
+      <div class="nav__btns">
+        <button class="btn">Login</button>
+      </div>
+    </nav>
+
+    <header class="section__container header__container" id="home">
+      <div class="header__content">
+        <h1><span>Wellness</span> Travel Body . Mind . Spirit </h1>
+        <p class="section__description">
+          Discover bespoke luxury journeys through Southern Africa's most breathtaking landscapes. 
+          Curated experiences in South Africa, Botswana, Zimbabwe and beyond await your exploration.
+        </p>
+        <form action="/">
+          <div class="input__group">
+            <label for="location">Destination</label>
+            <input type="text" name="location" placeholder="Kruger, Okavango..." />
+          </div>
+          <div class="input__group">
+            <label for="date">Travel Date</label>
+            <input type="text" name="date" placeholder="Select dates" />
+          </div>
+          <div class="input__group">
+            <label for="price">Experience Type</label>
+            <input type="text" name="price" placeholder="e.g. Safari, Wine, Golf" />
+          </div>
+          <button class="btn"><i class="ri-search-line"></i></button>
+        </form>
+      </div>
+      <div class="header__image">
+        <img src="/assets/yoga-2.jpg" alt="header" />
+        <img src="/assets/yoga.jpg" alt="header" />
+        <img src="/assets/casalinga.jpg" alt="header" />
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" />
+      </div>
+    </header>
+
+    <section class="section__container choose__container" id="about">
+      <div class="choose__image">
+        <img src="/assets/hiking.jpg" alt="choose" />
+      </div>
+      <div class="choose__content">
+        <p class="section__subheader">Why Choose Us?</p>
+        <h2 class="section__header">Crafting Unforgettable African<span> Journeys</span></h2>
+        <ul class="choose__list">
+          <li>
+            <span><i class="ri-verified-badge-line"></i></span>
+            <div>
+              <h4>Two Decades of Excellence</h4>
+              <p>
+                With over 20 years of creating bespoke Southern African experiences, 
+                our expertise ensures your journey is seamless and extraordinary.
+              </p>
             </div>
-        </div>
+          </li>
+          <li>
+            <span><i class="ri-customer-service-2-line"></i></span>
+            <div>
+              <h4>Personalized Service</h4>
+              <p>
+                Your dedicated travel consultant creates a completely customized itinerary 
+                based on your unique interests, pace, and preferences.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span><i class="ri-copper-diamond-line"></i></span>
+            <div>
+              <h4>Exclusive Access & Partnerships</h4>
+              <p>
+                Our long-standing relationships grant you privileged access to premier lodges, 
+                private reserves, and unique experiences unavailable to regular travelers.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="featured-tours">
-        <div class="container">
-            <h2>Popular Tours</h2>
-            <div class="tour-grid">
-                <% tours.forEach(function(tour) { %>
-                    <div class="tour-card">
-                        <h3><%= tour.title %></h3>
-                        <p class="tour-description"><%= tour.description %></p>
-                        <div class="tour-details">
-                            <span class="price">R<%= tour.price %></span>
-                            <span class="duration"><%= tour.duration %></span>
-                        </div>
-                        <a href="/tours/<%= tour.id %>" class="btn">View Details</a>
+    <section class="section__container popular__container" id="package">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" class="popular__bg" />
+      <p class="section__subheader">Famous Tours</p>
+      <h2 class="section__header">Our Popular <span>Tours</span></h2>
+      <!-- Slider main container -->
+      <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <% tours.forEach(function(tour) { %>
+            <div class="swiper-slide">
+              <div class="popular__card">
+                <img src="https://mhondoro.com/wp-content/uploads/2024/09/Safaris_Resized.webp" alt="popular" />
+                <div class="popular__content">
+                  <div class="popular__rating">
+                    <span><i class="ri-star-line"></i></span>
+                    4.0(34) Reviews
+                  </div>
+                  <h4>Lakshadweep</h4>
+                  <p><span>R 28,000/-</span> Per Person</p>
+                  <div class="popular__card__footer">
+                    <div>
+                      <span><i class="ri-time-line"></i></span> 4 Day's
                     </div>
-                <% }); %>
+                    <!-- <div>
+                      <span><i class="ri-group-3-line"></i></span> 15+
+                    </div> -->
+                    <div>
+                      <span><i class="ri-map-pin-2-line"></i></span> Bushbugridge 
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="center">
-                <a href="/tours" class="cta-button">View All Tours</a>
-            </div>
+          <% }); %>
         </div>
+      </div>
     </section>
-</main>
 
-<%- include('../partials/footer') %>
+    <section class="section__container explore__container">
+      <div class="explore__image">
+        <img src="/assets/waterfall.jpg" alt="explore" />
+      </div>
+      <div class="explore__content">
+        <p class="section__subheader">Our Expertise</p>
+        <h2 class="section__header">
+          Crafting <span>Extraordinary</span> African Journeys
+        </h2>
+        <p class="section__description">
+          For over two decades, Casalinga Tours has specialized in creating bespoke luxury experiences across Southern Africa. 
+          Our deep connections and insider knowledge allow us to craft journeys that go beyond the ordinary, offering exclusive 
+          access to pristine wilderness, premier accommodations, and authentic cultural encounters.
+        </p>
+        <div class="explore__btn">
+          <button class="btn">Discover Our Story</button>
+        </div>
+        <div class="explore__grid">
+          <div>
+            <h4>20+</h4>
+            <p>Years Of<br />Excellence</p>
+          </div>
+          <div>
+            <h4>6</h4>
+            <p>Southern African<br />States</p>
+          </div>
+          <div>
+            <h4>98%</h4>
+            <p>Client<br />Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container client__container">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" class="client__bg" />
+      <p class="section__subheader">What Our Client Say's?</p>
+      <h2 class="section__header">Client <span>Testimonials</span></h2>
+      <div class="client__card active">
+        <img src="/assets/client-1.jpg" alt="client" />
+        <div class="client__content">
+          <h4>Emma Johnson</h4>
+          <h5>Travel Blogger</h5>
+          <p>
+            This travel platform turned my bucket list dreams into reality! The
+            booking process was seamless, and their team provided excellent
+            guidance on must-visit spots. Every step felt effortless, and I
+            can't wait to plan my next adventure with them. Highly recommended!
+          </p>
+        </div>
+      </div>
+      <div class="client__card">
+        <img src="/assets/client-2.jpg" alt="client" />
+        <div class="client__content">
+          <h4>Sophia Lee</h4>
+          <h5>Software Engineer</h5>
+          <p>
+            Traveling with this service was a delight! The flexible booking
+            options gave me the freedom to plan at my own pace, and the detailed
+            itineraries ensured I didn't miss anything important. I felt like
+            they genuinely cared about creating the perfect travel experience
+            for me. Absolutely wonderful!
+          </p>
+        </div>
+      </div>
+      <div class="client__card">
+        <img src="/assets/client-3.jpg" alt="client" />
+        <div class="client__content">
+          <h4>Michael Roberts</h4>
+          <h5>Photographer</h5>
+          <p>
+            As a photographer, finding picturesque locations is key, and this
+            platform exceeded my expectations. They not only made booking easy
+            but also helped me discover some incredible hidden gems. Their
+            attention to detail made my journey unforgettable and hassle-free!
+          </p>
+        </div>
+      </div>
+      <div class="/client__btns">
+        <button class="btn" id="prev">
+          <i class="ri-arrow-left-line"></i>
+        </button>
+        <button class="btn" id="next">
+          <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+    </section>
+
+    <section class="section__container subscribe__container" id="contact">
+      <h2 class="section__header">
+        Subscribe To Get The Latest News <span>About Us</span>
+      </h2>
+      <p class="section__description">
+        Stay updated with the latest travel deals, destination highlights, and
+        exclusive offers. Subscribe now and never miss out on exciting news and
+        updates about our services!
+      </p>
+      <form action="/">
+        <input type="text" placeholder="Your Email" />
+        <button class="btn">Subscribe</button>
+      </form>
+    </section>
+
+    <footer>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="#">casalingatours</a>
+          </div>
+          <p>
+            Explore the world with us! Connect through our social media
+            channels, find quick links to essential resources, and access 24/7
+            support to make your travel planning effortless.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-twitter-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Services</h4>
+          <ul class="footer__links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Instagram</h4>
+          <div class="footer__col__flex">
+            <img src="/assets/instagram-1.jpg" alt="instagram" />
+            <img src="/assets/instagram-2.jpg" alt="instagram" />
+            <img src="/assets/instagram-3.jpg" alt="instagram" />
+            <img src="/assets/instagram-4.jpg" alt="instagram" />
+            <img src="/assets/instagram-5.jpg" alt="instagram" />
+            <img src="/assets/instagram-6.jpg" alt="instagram" />
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <ul class="footer__links">
+            <li>
+              <a href="#">
+                <span><i class="ri-phone-fill"></i></span> +91 0987654321
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-map-pin-fill"></i></span> New Delhi, India
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-mail-fill"></i></span> info@carrental
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2025 CodeNexus. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/home-page.js"></script>
+  </body>
+</html>

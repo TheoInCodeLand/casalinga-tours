@@ -56,16 +56,16 @@ db.serialize(() => {
     )`);
 
     // 4. Insert a default admin user (Password: admin123)
-    const passwordHash = bcrypt.hashSync('admin123', 12);
-    db.run(`INSERT OR IGNORE INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`,
-        ['Site Admin', 'admin@casalingatours.co.za', passwordHash, 'admin'],
-        function(err) {
-            if (err) {
-                return console.error(err.message);
-            }
-            console.log(`Default admin user created with ID: ${this.lastID}`);
-        }
-    );
+    // const passwordHash = bcrypt.hashSync('admin123', 12);
+    // db.run(`INSERT OR IGNORE INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`,
+    //     ['Site Admin', 'admin@casalingatours.co.za', passwordHash, 'admin'],
+    //     function(err) {
+    //         if (err) {
+    //             return console.error(err.message);
+    //         }
+    //         console.log(`Default admin user created with ID: ${this.lastID}`);
+    //     }
+    // );
 
     // 5. Insert sample tours
     // const insertTour = db.prepare(`INSERT OR IGNORE INTO tours (title, description, detailed_description, price, duration, category) VALUES (?, ?, ?, ?, ?, ?)`);
