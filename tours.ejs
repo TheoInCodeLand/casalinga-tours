@@ -1,0 +1,31 @@
+<%- include('../partials/head', { title: title }) %>
+<%- include('../partials/header') %>
+
+<main class="container">
+    <h1>Our Tours & Experiences</h1>
+    <p>Discover our transformative wellness journeys</p>
+    
+    <div class="tour-list">
+        <% if (tours.length > 0) { %>
+            <% tours.forEach(function(tour) { %>
+                <div class="tour-item">
+                    <h2><%= tour.title %></h2>
+                    <p><%= tour.description %></p>
+                    <div class="tour-meta">
+                        <span class="price">R<%= tour.price %></span>
+                        <span class="duration"><%= tour.duration %></span>
+                        <span class="category"><%= tour.category %></span>
+                    </div>
+                    <div class="tour-actions">
+                        <a href="/tours/<%= tour.id %>" class="btn">View Details</a>
+                        <a href="/bookings/new?tour_id=<%= tour.id %>" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No tours available at the moment. Please check back later.</p>
+        <% } %>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

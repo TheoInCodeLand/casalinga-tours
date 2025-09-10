@@ -1,15 +1,3 @@
-<% tours.forEach(function(tour) { %>
-    <!-- <div class="tour-card">
-        <h3><%= tour.title %></h3>
-        <p class="tour-description"><%= tour.description %></p>
-        <div class="tour-details">
-            <span class="price">R<%= tour.price %></span>
-            <span class="duration"><%= tour.duration %></span>
-        </div>
-        <a href="/tours/<%= tour.id %>" class="btn">View Details</a>
-    </div> -->
-<% }); %>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,28 +14,89 @@
     <link rel="stylesheet" href="/css/home-page.css" />
     <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
     <title>Casalinga Tours | Wellness Travel Body.Mind.Spirit</title>
+
   </head>
+  <style>
+    :root {
+      --primary-color: #007a25;
+      --primary-shadow-color: #007a2571;
+      --primary-color-dark: #005218;
+      --text-dark: #020617;
+      --text-light: #1e293b;
+      --extra-light: #f3f4f6;
+      --white: #ffffff;
+      --max-width: 1200px;
+    }
+
+    nav .nav__links li .active {
+      color: var(--primary-color);
+      filter: drop-shadow(4px 4px 10px var(--primary-shadow-color));
+    }
+  </style>
   <body>
+    <!-- NAVBAR -->
     <nav>
       <div class="nav__header">
         <div class="nav__logo" >
-          <a href="#" style="display: flex; align-items: center;"><span><img src="/assets/logo_no_bg.png" alt="" style="width: 4rem;"></span>Casalinga<span>Tours</span></a>
+          <a href="#" style="display: flex; align-items: center;"><span><img src="/assets/logo_no_bg.png" alt="" style="width: 2.8rem;"></span>casalingatours</a>
         </div>
         <div class="nav__menu__btn" id="menu-btn">
           <i class="ri-menu-3-line"></i>
         </div>
       </div>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#package">Destinations</a></li>
-        <li><a href="/tours">Tours & Safaris</a></li>
-        <li><a href="/blog">Blog</a></li>
-      </ul>
-      <div class="nav__btns">
-        <button class="btn"><a href="/auth/login">Login</a></button>
-      </div>
+
+      <% if (session.userId) { %>
+        
+        <!-- USER NAVBAR -->
+        <% if (session.userRole === 'customer') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/bookings/my-bookings">My Bookings</a></li>
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+        <% } %>
+
+        <!-- ADMIN NAVBAR -->
+        <% if (session.userRole === 'admin') { %>
+
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/"  class="active">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/admin/bookings">Bookings</a></li>
+            <li><a href="/admin/dashboard">Admin</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+          <!-- <li><a href="/admin/dashboard">Admin</a></li> -->
+        <% } %>
+        <li style="display: none;"><a href="/auth/logout" >Logout (<%= session.userName %>)</a></li>
+
+      <% } else { %>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="/"  class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="/tours">Leisures</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="nav__btns">
+          <button class="btn"><a href="/auth/login">Login</a></button>
+        </div>
+      <% } %>
+
     </nav>
+
+    <!-- HEADER SECTIOIN -->
     <header class="section__container header__container" id="home">
       <div class="header__content">
         <h1><span>Wellness</span> Travel Body . Mind . Spirit </h1>
@@ -71,13 +120,16 @@
           <button class="btn"><i class="ri-search-line"></i></button>
         </form>
       </div>
+      
       <div class="header__image">
         <img src="/assets/yoga-2.jpg" alt="header" />
         <img src="/assets/yoga.jpg" alt="header" />
-        <img src="/assets/casalinga.jpg" alt="header" />
-        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" />
+        <img src="/assets/hiking-1.jpg" alt="header" />
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" />
       </div>
     </header>
+
+    <!-- CHOOSE US SECTION -->
     <section class="section__container choose__container" id="about">
       <div class="choose__image">
         <img src="/assets/hiking.jpg" alt="choose" />
@@ -119,8 +171,10 @@
         </ul>
       </div>
     </section>
+
+    <!-- FAMOUS TOURS SECTION -->
     <section class="section__container popular__container" id="package">
-      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" class="popular__bg" />
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" class="popular__bg" />
       <p class="section__subheader">Famous Tours</p>
       <h2 class="section__header">Our Popular <span>Tours</span></h2>
       <!-- Slider main container -->
@@ -138,6 +192,7 @@
                     4.0(34 Reviews) 
                   </div>
                   <h4><%= tour.title %></h4>
+                  <p class="location"><i class="ri-map-pin-2-line"></i> <%= tour.address %> </p>
                   <p><span>R <%= tour.price %>/-</span> Per Person</p>
                   <div class="popular__card__footer">
                     <div>
@@ -147,7 +202,7 @@
                       <span><i class="ri-group-3-line"></i></span> 15+
                     </div> -->
                     <div>
-                      <span><i class="ri-map-pin-2-line"></i></span> <%= tour.category %>
+                      <span><i class="ri-suitcase-3-line"></i></span> <%= tour.category %>
                     </div>
                   </div>
                 </div>
@@ -181,6 +236,8 @@
         </div>
       </div>
     </section>
+
+    <!-- EXPERTISE SECTION -->
     <section class="section__container explore__container">
       <div class="explore__image">
         <img src="/assets/waterfall.jpg" alt="explore" />
@@ -215,8 +272,9 @@
       </div>
     </section>
 
+    <!-- TESTIMONIALS SECTION -->
     <section class="section__container client__container">
-      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" class="client__bg" />
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" class="client__bg" />
       <p class="section__subheader">What Our Client Say's?</p>
       <h2 class="section__header">Client <span>Testimonials</span></h2>
       <div class="client__card active">
@@ -269,6 +327,7 @@
       </div>
     </section>
 
+    <!-- SUBSCRIBE SECTION -->
     <section class="section__container subscribe__container" id="contact">
       <h2 class="section__header">
         Subscribe To Get The Latest News <span>About Us</span>
@@ -284,6 +343,7 @@
       </form>
     </section>
 
+    <!-- FOOTER SECTION -->
     <footer>
       <div class="section__container footer__container">
         <div class="footer__col">
@@ -320,12 +380,12 @@
         <div class="footer__col">
           <h4>Instagram</h4>
           <div class="footer__col__flex">
-            <img src="/assets/instagram-1.jpg" alt="instagram" />
-            <img src="/assets/instagram-2.jpg" alt="instagram" />
-            <img src="/assets/instagram-3.jpg" alt="instagram" />
-            <img src="/assets/instagram-4.jpg" alt="instagram" />
-            <img src="/assets/instagram-5.jpg" alt="instagram" />
-            <img src="/assets/instagram-6.jpg" alt="instagram" />
+            <img src="/assets/golf-1.jpg" alt="instagram" />
+            <img src="/assets/canoeing-1.jpg" alt="instagram" />
+            <img src="/assets/picnic-1.jpg" alt="instagram" />
+            <img src="/assets/quad-1.jpg" alt="instagram" />
+            <img src="/assets/waterfall.jpg" alt="instagram" />
+            <img src="/assets/hiking-1.jpg" alt="instagram" />
           </div>
         </div>
         <div class="footer__col">
@@ -354,6 +414,7 @@
       </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/js/home-page.js"></script>

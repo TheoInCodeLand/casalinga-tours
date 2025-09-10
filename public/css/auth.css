@@ -1,18 +1,12 @@
 
 /* From Uiverse.io by JohnnyCSilva */ 
-html {
-    background: url('../assets/Screenshot\ \(1\)-Picsart-AiImageEnhancer.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+
 body { 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background: rgba(251, 255, 255, 0.966);
 }
 
 .container {
@@ -22,8 +16,6 @@ body {
     align-items: center;
     border-radius: 20px;
     background: #ffffff;
-    box-shadow:  20px 20px 60px #ededed88,
-                -20px -20px 60px #ffffff83;
 }
 
 .__logo img{
