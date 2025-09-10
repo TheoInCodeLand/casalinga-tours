@@ -1,16 +1,403 @@
-<%- include('../partials/head', { title: title }) %>
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Casalinga Tours - Get in touch with our travel experts to plan your perfect wellness journey through Southern Africa.">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/home-page.css" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
+    <title>Contact Us | Casalinga Tours | Wellness Travel Experts</title>
+  </head>
+  <style>
+    :root {
+      --primary-color: #007a25;
+      --primary-shadow-color: #007a2571;
+      --primary-color-dark: #005218;
+      --text-dark: #020617;
+      --text-light: #1e293b;
+      --extra-light: #f3f4f6;
+      --white: #ffffff;
+      --max-width: 1200px;
+    }
 
-<main class="container">
-    <div class="page-header">
-        <h1>Contact Us</h1>
-        <p>Get in touch with us to start your wellness journey</p>
-        <% if (typeof message !== 'undefined' && message) { %>
-            <div class="alert alert-<%= message.type %>">
-                <%= message.text %>
-            </div>
+    nav .nav__links li .active {
+      color: var(--primary-color);
+      filter: drop-shadow(4px 4px 10px var(--primary-shadow-color));
+    }
+  </style>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="/" style="display: flex; align-items: center;">
+            <span><img src="/assets/logo_no_bg.png" alt="Casalinga Tours Logo" style="width: 2.8rem;"></span>
+            casalingatours
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+
+      <% if (session.userId) { %>
+        <!-- USER NAVBAR -->
+        <% if (session.userRole === 'customer') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/bookings/my-bookings">My Bookings</a></li>
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/contact" class="active">Contact</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
         <% } %>
-    </div>
+
+        <!-- ADMIN NAVBAR -->
+        <% if (session.userRole === 'admin') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact" class="active">Contact</a></li>
+            <li><a href="/admin/bookings">Bookings</a></li>
+            <li><a href="/admin/dashboard">Admin</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+        <% } %>
+      <% } else { %>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/tours">Leisures</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact" class="active">Contact</a></li>
+        </ul>
+        <div class="nav__btns">
+          <button class="btn"><a href="/auth/login">Login</a></button>
+        </div>
+      <% } %>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="contact-hero">
+      <div class="section__container contact-hero__container">
+        <div class="contact-hero__content">
+          <h1>Get in <span>Touch</span> With Us</h1>
+          <p class="section__description">
+            Our travel experts are ready to help you plan the perfect wellness journey through Southern Africa. 
+            Reach out to us with your questions, ideas, or to start planning your adventure.
+          </p>
+        </div>
+        <div class="contact-hero__image">
+          <img src="/assets/logo-full.png" alt="Travel expert assisting clients" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT METHODS SECTION -->
+    <section class="section__container contact-methods__container">
+      <div class="contact-methods__grid">
+        <div class="contact-method">
+          <span><i class="ri-phone-fill"></i></span>
+          <h3>Call Us</h3>
+          <p>+27 12 345 6789</p>
+          <p>Mon-Fri: 8am-6pm SAT: 9am-1pm</p>
+        </div>
+        <div class="contact-method">
+          <span><i class="ri-mail-fill"></i></span>
+          <h3>Email Us</h3>
+          <p>info@casalingatours.com</p>
+          <p>We'll respond within 24 hours</p>
+        </div>
+        <div class="contact-method">
+          <span><i class="ri-map-pin-fill"></i></span>
+          <h3>Visit Us</h3>
+          <p>123 Safari Road, Pretoria</p>
+          <p>South Africa, 0001</p>
+        </div>
+        <div class="contact-method">
+          <span><i class="ri-chat-3-fill"></i></span>
+          <h3>Live Chat</h3>
+          <p>Available during business hours</p>
+          <p>Click the chat icon to start</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section class="contact-form__section">
+      <div class="section__container">
+        <div class="contact-form__container">
+          <div class="form__content">
+            <p class="section__subheader">Send a Message</p>
+            <h2 class="section__header">Let's Start Planning Your <span>Journey</span></h2>
+            <p class="section__description">
+              Fill out the form below and one of our travel experts will contact you within 24 hours 
+              to discuss your dream wellness adventure.
+            </p>
+            
+            <form id="contactForm" class="contact__form">
+              <div class="form__group">
+                <div class="input__group">
+                  <label for="name">Full Name *</label>
+                  <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="input__group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required placeholder="Your email address">
+                </div>
+              </div>
+              
+              <div class="form__group">
+                <div class="input__group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                </div>
+                <div class="input__group">
+                  <label for="country">Country</label>
+                  <input type="text" id="country" name="country" placeholder="Your country of residence">
+                </div>
+              </div>
+              
+              <div class="input__group">
+                <label for="interest">Interest/Tour Type</label>
+                <select id="interest" name="interest">
+                  <option value="">Select your interest</option>
+                  <option value="safari">Wildlife Safari</option>
+                  <option value="wellness">Wellness Retreat</option>
+                  <option value="adventure">Adventure Tour</option>
+                  <option value="cultural">Cultural Experience</option>
+                  <option value="custom">Custom Itinerary</option>
+                </select>
+              </div>
+              
+              <div class="input__group">
+                <label for="message">Your Message *</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your dream journey..."></textarea>
+              </div>
+              
+              <button type="submit" class="btn form__btn">Send Message <i class="ri-send-plane-fill"></i></button>
+            </form>
+          </div>
+          
+          <div class="form__image">
+            <img src="/assets/logo.png" alt="Travel consultation">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq__section">
+      <div class="section__container">
+        <p class="section__subheader">Common Questions</p>
+        <h2 class="section__header">Frequently Asked <span>Questions</span></h2>
+        
+        <div class="faq__accordion">
+          <div class="faq__item">
+            <button class="faq__question">
+              How far in advance should I book my tour?
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="faq__answer">
+              <p>We recommend booking at least 3-6 months in advance for the best availability, especially for peak seasons (June-October). For custom itineraries and luxury accommodations, 6-12 months in advance is ideal.</p>
+            </div>
+          </div>
+          
+          <div class="faq__item">
+            <button class="faq__question">
+              What is included in your tour packages?
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Our packages typically include accommodation, meals as specified, guided activities, park fees, and transportation during the tour. Flights to/from Africa, travel insurance, visas, and personal expenses are generally not included unless specified.</p>
+            </div>
+          </div>
+          
+          <div class="faq__item">
+            <button class="faq__question">
+              Do you cater to special dietary requirements?
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Yes, we can accommodate most dietary requirements with advance notice. Please inform us of any allergies, restrictions, or preferences when booking so we can make appropriate arrangements with our partners.</p>
+            </div>
+          </div>
+          
+          <div class="faq__item">
+            <button class="faq__question">
+              What safety measures do you have in place?
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Your safety is our priority. All our guides are trained in first aid, vehicles are well-maintained, and we follow all local health guidelines. We also partner with lodges and camps that maintain high safety standards.</p>
+            </div>
+          </div>
+          
+          <div class="faq__item">
+            <button class="faq__question">
+              Can you help with visa requirements?
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+            <div class="faq__answer">
+              <p>While we cannot process visas on your behalf, we provide detailed information about visa requirements for each country you'll be visiting and can recommend reputable visa processing services if needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="map__section">
+      <div class="section__container">
+        <p class="section__subheader">Our Location</p>
+        <h2 class="section__header">Find Us in <span>Pretoria</span></h2>
+        
+        <div class="map__container">
+          <div class="map__embed">
+            <!-- Replace with actual Google Maps embed code -->
+            <div style="width: 100%; height: 400px; background-color: #f3f4f6; border-radius: 1rem; display: flex; align-items: center; justify-content: center;">
+              <div style="text-align: center;">
+                <i class="ri-map-pin-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                <p>Google Maps Embed</p>
+                <p>123 Safari Road, Pretoria, South Africa</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="map__info">
+            <h3>Office Hours</h3>
+            <div class="hours__list">
+              <div class="hour__item">
+                <span>Monday - Friday</span>
+                <span>8:00 AM - 6:00 PM</span>
+              </div>
+              <div class="hour__item">
+                <span>Saturday</span>
+                <span>9:00 AM - 1:00 PM</span>
+              </div>
+              <div class="hour__item">
+                <span>Sunday</span>
+                <span>Closed</span>
+              </div>
+            </div>
+            
+            <h3>Emergency Contact</h3>
+            <p>For urgent matters outside office hours, please call our 24/7 emergency line:</p>
+            <p class="emergency__number">+27 87 654 3210</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="section__container subscribe__container">
+      <h2 class="section__header">
+        Subscribe To Get The Latest News <span>About Our Tours</span>
+      </h2>
+      <p class="section__description">
+        Stay updated with the latest travel deals, destination highlights, and
+        exclusive offers. Subscribe now and never miss out on exciting news and
+        updates about our services!
+      </p>
+      <form action="/">
+        <input type="text" placeholder="Your Email" />
+        <button class="btn">Subscribe</button>
+      </form>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="/">casalingatours</a>
+          </div>
+          <p>
+            Explore the world with us! Connect through our social media
+            channels, find quick links to essential resources, and access 24/7
+            support to make your travel planning effortless.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-twitter-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Services</h4>
+          <ul class="footer__links">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/tours">Destinations</a></li>
+            <li><a href="/tours">Safari Experiences</a></li>
+            <li><a href="/tours">Wellness Retreats</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Instagram</h4>
+          <div class="footer__col__flex">
+            <img src="/assets/golf-1.jpg" alt="instagram" />
+            <img src="/assets/canoeing-1.jpg" alt="instagram" />
+            <img src="/assets/picnic-1.jpg" alt="instagram" />
+            <img src="/assets/quad-1.jpg" alt="instagram" />
+            <img src="/assets/waterfall.jpg" alt="instagram" />
+            <img src="/assets/hiking-1.jpg" alt="instagram" />
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <ul class="footer__links">
+            <li>
+              <a href="#">
+                <span><i class="ri-phone-fill"></i></span> +27 12 345 6789
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-map-pin-fill"></i></span> Pretoria, South Africa
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-mail-fill"></i></span> info@casalingatours.com
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2025 Casalinga Tours. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/js/home-page.js"></script>
+    <script src="/js/contact.js"></script>
+  </body>
+</html>
+<!-- <main class="container">
+
+    
 
     <div class="contact-container">
         <div class="contact-info">
@@ -75,6 +462,4 @@
             </form>
         </div>
     </div>
-</main>
-
-<%- include('../partials/footer') %>
+</main> -->

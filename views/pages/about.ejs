@@ -1,62 +1,327 @@
-<%- include('../partials/head', { title: title }) %>
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn about Casalinga Tours - our story, mission, and team dedicated to creating unforgettable wellness travel experiences across Southern Africa.">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/home-page.css" />
+    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
+    <title>About Us | Casalinga Tours | Wellness Travel Experts</title>
+  </head>
+  <style>
+    :root {
+      --primary-color: #007a25;
+      --primary-shadow-color: #007a2571;
+      --primary-color-dark: #005218;
+      --text-dark: #020617;
+      --text-light: #1e293b;
+      --extra-light: #f3f4f6;
+      --white: #ffffff;
+      --max-width: 1200px;
+    }
 
-<main class="container">
-    <div class="page-header">
-        <h1>About Casalinga Tours</h1>
-        <p>Transforming lives through wellness travel experiences</p>
-    </div>
-
-    <section class="about-content">
-        <div class="about-section">
-            <h2>Our Story</h2>
-            <p>Casalinga Tours was founded by Samukeliswe, a qualified nurse with over 9 years of experience in mental health departments at the Department of Health. Her passion for mental wellness and personal growth led to the creation of a unique travel company that integrates therapeutic experiences with adventure.</p>
-            
-            <p>Our company is officially registered with CIPC under registration number <strong>2021/786808/07</strong>, ensuring professional and legitimate services for all our clients.</p>
+    nav .nav__links li .active {
+      color: var(--primary-color);
+      filter: drop-shadow(4px 4px 10px var(--primary-shadow-color));
+    }
+  </style>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="/" style="display: flex; align-items: center;">
+            <span><img src="/assets/logo_no_bg.png" alt="Casalinga Tours Logo" style="width: 2.8rem;"></span>
+            casalingatours
+          </a>
         </div>
-
-        <div class="about-section">
-            <h2>Our Mission</h2>
-            <p>We are a pioneering wellness-focused travel company dedicated to promoting mental health, personal growth, and holistic well-being through innovative experiences. Unlike traditional travel agencies, we integrate wellness into every aspect of our offerings.</p>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
         </div>
+      </div>
 
-        <div class="about-section">
-            <h2>Our Vision</h2>
-            <p>To become the leading global wellness travel company, renowned for integrating mental health support, adventure, and holistic experiences that cater to the <strong>BODY, SOUL, AND SPIRIT</strong>.</p>
-        </div>
+      <% if (session.userId) { %>
+        <!-- USER NAVBAR -->
+        <% if (session.userRole === 'customer') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/bookings/my-bookings">My Bookings</a></li>
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+        <% } %>
 
-        <div class="about-section">
-            <h2>Our Achievements</h2>
-            <ul class="achievements-list">
-                <li>✓ Successfully expanded operational capacity with a 9-seater bus</li>
-                <li>✓ Hosted memorable travel experiences to Mozambique</li>
-                <li>✓ Built a reputation for transformative wellness journeys</li>
-                <li>✓ Served numerous corporate clients for team building and conflict management</li>
-            </ul>
+        <!-- ADMIN NAVBAR -->
+        <% if (session.userRole === 'admin') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/admin/bookings">Bookings</a></li>
+            <li><a href="/admin/dashboard">Admin</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+        <% } %>
+      <% } else { %>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about" class="active">About</a></li>
+          <li><a href="/tours">Leisures</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="nav__btns">
+          <button class="btn"><a href="/auth/login">Login</a></button>
         </div>
+      <% } %>
+    </nav>
 
-        <div class="about-section">
-            <h2>Why Choose Us?</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <h3>Professional Expertise</h3>
-                    <p>Founded by healthcare professionals with extensive mental health experience</p>
-                </div>
-                <div class="feature">
-                    <h3>Holistic Approach</h3>
-                    <p>We cater to all aspects of well-being: body, soul, and spirit</p>
-                </div>
-                <div class="feature">
-                    <h3>Diverse Offerings</h3>
-                    <p>From bush camps to corporate events and wellness retreats</p>
-                </div>
-                <div class="feature">
-                    <h3>Fully Certified</h3>
-                    <p>Registered with CIPC and compliant with all regulations</p>
-                </div>
-            </div>
+    <!-- HEADER SECTIOIN -->
+    <header class="section__container header__container" id="home">
+      <div class="header__content">
+        <h1><span>Wellness</span> Travel Body . Mind . Spirit </h1>
+        <p class="section__description">
+          Discover bespoke luxury journeys through Southern Africa's most breathtaking landscapes. 
+          Curated experiences in South Africa, Botswana, Zimbabwe and beyond await your exploration.
+        </p>
+        <form action="/">
+          <div class="input__group">
+            <label for="location">Destination</label>
+            <input type="text" name="location" placeholder="Kruger, Okavango..." />
+          </div>
+          <div class="input__group">
+            <label for="date">Travel Date</label>
+            <input type="text" name="date" placeholder="Select dates" />
+          </div>
+          <div class="input__group">
+            <label for="price">Experience Type</label>
+            <input type="text" name="price" placeholder="e.g. Safari, Wine, Golf" />
+          </div>
+          <button class="btn"><i class="ri-search-line"></i></button>
+        </form>
+      </div>
+      
+      <div class="header__image">
+        <img src="/assets/yoga-2.jpg" alt="header" />
+        <img src="/assets/yoga.jpg" alt="header" />
+        <img src="/assets/hiking-1.jpg" alt="header" />
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" />
+      </div>
+    </header>
+
+    <!-- MISSION SECTION -->
+    <section class="section__container mission__container">
+      <div class="mission__image">
+        <img src="/assets/logo-full.png" alt="Sunset in African wilderness" />
+      </div>
+      <div class="mission__content">
+        <p class="section__subheader">Our Mission</p>
+        <h2 class="section__header">Transforming Lives Through <span>Authentic Travel</span></h2>
+        <p class="section__description">
+          At Casalinga Tours, we believe that travel should be more than just sightseeing—it should be a transformative experience that connects you with nature, culture, and yourself. Our mission is to create journeys that nourish your body, challenge your mind, and renew your spirit.
+        </p>
+        <div class="mission__stats">
+          <div class="stat">
+            <h4>20+</h4>
+            <p>Years of Excellence</p>
+          </div>
+          <div class="stat">
+            <h4>5,000+</h4>
+            <p>Happy Travelers</p>
+          </div>
+          <div class="stat">
+            <h4>6</h4>
+            <p>Countries Covered</p>
+          </div>
+          <div class="stat">
+            <h4>98%</h4>
+            <p>Client Satisfaction</p>
+          </div>
         </div>
+      </div>
     </section>
-</main>
 
-<%- include('../partials/footer') %>
+    <!-- VALUES SECTION -->
+    <section class="values__section">
+      <div class="section__container">
+        <p class="section__subheader">Our Values</p>
+        <h2 class="section__header">The Pillars of <span>Our Philosophy</span></h2>
+        <div class="values__grid">
+          <div class="value__card">
+            <span><i class="ri-heart-line"></i></span>
+            <h4>Wellness Focus</h4>
+            <p>We design experiences that promote physical health, mental clarity, and spiritual connection through nature immersion and mindful activities.</p>
+          </div>
+          <div class="value__card">
+            <span><i class="ri-community-line"></i></span>
+            <h4>Sustainable Tourism</h4>
+            <p>We're committed to preserving Africa's natural beauty and supporting local communities through responsible travel practices.</p>
+          </div>
+          <div class="value__card">
+            <span><i class="ri-user-star-line"></i></span>
+            <h4>Personalized Service</h4>
+            <p>Every journey is tailored to your unique preferences, with attention to detail that makes each experience truly personal.</p>
+          </div>
+          <div class="value__card">
+            <span><i class="ri-shield-check-line"></i></span>
+            <h4>Expert Guidance</h4>
+            <p>Our team of seasoned guides and wellness experts ensure your safety, comfort, and enrichment throughout your journey.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="section__container team__container">
+      <p class="section__subheader">Meet Our Team</p>
+      <h2 class="section__header">The <span>Hearts & Minds</span> Behind Your Journey</h2>
+      <div class="team__grid">
+        <div class="team__member">
+          <img src="/assets/me.jpeg" alt="Sarah Johnson - Founder" />
+          <h4>Sarah Johnson</h4>
+          <p>Founder & CEO</p>
+          <div class="member__socials">
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </div>
+        </div>
+        <div class="team__member">
+          <img src="/assets/me.jpeg" alt="David Mbatha - Head Guide" />
+          <h4>David Mbatha</h4>
+          <p>Head Safari Guide</p>
+          <div class="member__socials">
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+          </div>
+        </div>
+        <div class="team__member">
+          <img src="/assets/me.jpeg" alt="Lerato Ndlovu - Wellness Expert" />
+          <h4>Lerato Ndlovu</h4>
+          <p>Wellness Director</p>
+          <div class="member__socials">
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </div>
+        </div>
+        <div class="team__member">
+          <img src="/assets/me.jpeg" alt="James Wilson - Operations" />
+          <h4>James Wilson</h4>
+          <p>Operations Manager</p>
+          <div class="member__socials">
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- CTA SECTION -->
+    <section class="cta__section">
+      <div class="section__container cta__container">
+        <div class="cta__content">
+          <h2>Ready to Begin Your <span>Wellness Journey</span>?</h2>
+          <p class="section__description">
+            Connect with our travel experts to create your personalized African wellness adventure. 
+            We'll craft an experience that aligns with your goals and aspirations.
+          </p>
+          <div class="cta__btns">
+            <button class="btn"><a href="/contact">Contact Us</a></button>
+            <button class="btn btn-outline"><a href="/tours">Explore Tours</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="/">casalingatours</a>
+          </div>
+          <p>
+            Explore the world with us! Connect through our social media
+            channels, find quick links to essential resources, and access 24/7
+            support to make your travel planning effortless.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-twitter-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Services</h4>
+          <ul class="footer__links">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/tours">Destinations</a></li>
+            <li><a href="/tours">Safari Experiences</a></li>
+            <li><a href="/tours">Wellness Retreats</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Instagram</h4>
+          <div class="footer__col__flex">
+            <img src="/assets/golf-1.jpg" alt="instagram" />
+            <img src="/assets/canoeing-1.jpg" alt="instagram" />
+            <img src="/assets/picnic-1.jpg" alt="instagram" />
+            <img src="/assets/quad-1.jpg" alt="instagram" />
+            <img src="/assets/waterfall.jpg" alt="instagram" />
+            <img src="/assets/hiking-1.jpg" alt="instagram" />
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <ul class="footer__links">
+            <li>
+              <a href="#">
+                <span><i class="ri-phone-fill"></i></span> +27 12 345 6789
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-map-pin-fill"></i></span> Pretoria, South Africa
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-mail-fill"></i></span> info@casalingatours.com
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2025 Casalinga Tours. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/js/home-page.js"></script>
+    <script src="/js/about-page.js"></script>
+  </body>
+</html>

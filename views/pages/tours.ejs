@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="/css/tours-page.css" />
     <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
-    <title>Casalinga Tours | Wellness Travel Body.Mind.Spirit</title>
+    <title>Casalinga Tours | Events</title>
     <style>
         :root {
         --primary-color: #007a25;
@@ -262,7 +262,7 @@
         <% if (session.userRole === 'customer') { %>
           <ul class="nav__links" id="nav-links">
             <li><a href="/about">About</a></li>
-            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/tours"   class="active">Leisures</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/bookings/my-bookings">My Bookings</a></li>
             <li><a href="/user/dashboard">Dashboard</a></li>
@@ -277,9 +277,9 @@
         <% if (session.userRole === 'admin') { %>
 
           <ul class="nav__links" id="nav-links">
-            <li><a href="/"  class="active">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/tours"   class="active">Leisures</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/admin/bookings">Bookings</a></li>
@@ -294,9 +294,9 @@
 
       <% } else { %>
         <ul class="nav__links" id="nav-links">
-          <li><a href="/"  class="active">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="/tours">Leisures</a></li>
+          <li><a href="/tours"   class="active">Leisures</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
@@ -309,7 +309,7 @@
 
 
     <!-- EXPERTISE SECTION -->
-    <section class="section__container explore__container">
+    <!-- <section class="section__container explore__container">
       <div class="explore__image">
         <img src="/assets/waterfall.jpg" alt="explore" />
       </div>
@@ -325,7 +325,7 @@
         </p>
         
       </div>
-    </section>
+    </section> -->
 
     <!-- FAMOUS TOURS SECTION -->
     <% if (tours.length > 0) { %>

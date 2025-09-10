@@ -298,7 +298,7 @@ nav {
   display: grid;
   gap: 2rem 1rem;
   overflow: hidden;
-  background: linear-gradient(to bottom, #00521952, #00521900);
+  /* background: linear-gradient(to bottom, #00521952, #00521900); */
 
 }
 
