@@ -15,6 +15,103 @@
     <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
     <title>Casalinga Tours | Wellness Travel Body.Mind.Spirit</title>
     <style>
+
+      .swiper {
+            width: 100%;
+            height: auto;
+            padding: 2rem 0;
+        }
+        
+        .swiper-wrappper {
+            display: flex;
+
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: stretch;
+        }
+        
+        .swiper-slide {
+            height: auto;
+        }
+        
+        /* Popular card styles */
+        .popular__card {
+            background: #fff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            text-align: left;
+            flex-direction: column;
+        }
+        
+        .popular__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .popular__card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .popular__content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        
+        
+        .popular__rating span {
+            margin-right: 0.25rem;
+        }
+        
+        .popular__content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #212529;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .location i {
+            margin-right: 0.5rem;
+        }
+        
+        .popular__content p span {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .popular__card__footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .popular__card__footer div {
+            display: flex;
+            align-items: center;
+        }
+        
+        .popular__card__footer span {
+            margin-right: 0.25rem;
+        }
         #action_buttons {
             margin-top: auto;
             padding-top: 1.5rem;
