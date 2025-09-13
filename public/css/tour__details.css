@@ -1,0 +1,135 @@
+.tour__container {
+  padding-top: 7rem; /* Account for fixed nav */
+}
+
+.tour-detail {
+  display: grid;
+  gap: 2rem;
+}
+
+.tour-header {
+  text-align: center;
+}
+
+.tour-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.tour-image img {
+  max-width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tour-info {
+  display: grid;
+  gap: 2rem;
+}
+
+.tour-meta {
+  display: grid;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.meta-item .label {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.meta-item .value.available {
+  color: var(--primary-color);
+}
+
+.meta-item .value.unavailable {
+  color: #e53e3e;
+}
+
+.tour-description h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.tour-description p {
+  color: var(--text-light);
+  line-height: 1.75rem;
+}
+
+.tour-map-section {
+  margin-top: 2rem;
+}
+
+.tour-map {
+  height: 300px;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.map-address {
+  margin-top: 1rem;
+  color: var(--text-light);
+}
+
+.tour-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--text-dark);
+  border: 2px solid var(--primary-color);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-disabled {
+  background-color: var(--extra-light);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .tour-content {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .tour-header {
+    text-align: left;
+  }
+
+  .tour-actions {
+    justify-content: flex-start;
+  }
+}
