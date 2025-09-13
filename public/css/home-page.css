@@ -17,23 +17,6 @@
   box-sizing: border-box;
 }
 
-#bubble__ {
-  animation: scalePulse 3s infinite ease-in-out;
-  right: 5rem;
-}
-
-@keyframes scalePulse {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(0.65);
-  }
-  100% {
-    transform: scale(0.9);
-  }
-}
-
 .section__container {
   max-width: var(--max-width);
   margin: auto;
@@ -93,6 +76,10 @@
 
 .logout:hover {
   background-color: var(--primary-color-dark);
+}
+
+.logout {
+  display: none;
 }
 
 img {
@@ -197,8 +184,8 @@ nav {
 }
 
 .header__content h1 span {
-  color: var(--primary-color-dark);
-  filter: drop-shadow(4px 4px 10px var(--secondary-shadow-color));
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color);
 }
 
 .header__content .section__description {
@@ -298,8 +285,8 @@ nav {
 .choose__image img {
   max-width: 475px;
   margin-inline: auto;
-  border-radius: 2rem;
-  box-shadow: 30px -30px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  box-shadow: 10px -10px 0px rgba(24, 104, 0, 0.082);
 }
 
 .choose__list {
@@ -342,7 +329,7 @@ nav {
 
 .popular__bg {
   position: absolute;
-  left: 50%;
+  left: 75%;
   top: 0;
   transform: translate(-65%, -50%) rotate(-135deg);
   height: 12rem;
@@ -363,7 +350,7 @@ nav {
 .popular__card {
   margin-inline: 1rem;
   overflow: hidden;
-  border-radius: 3rem;
+  border-radius: 1.5rem;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -386,7 +373,7 @@ nav {
   color: var(--text-light);
   background-color: var(--white);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 .popular__rating span {
@@ -444,8 +431,8 @@ nav {
 .explore__image img {
   max-width: 475px;
   margin-inline: auto;
-  border-radius: 2rem;
-  box-shadow: -30px -30px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  box-shadow: -10px -10px 0px rgba(0, 102, 17, 0.089);
 }
 
 .explore__content .section__description {
@@ -476,96 +463,6 @@ nav {
   color: var(--text-light);
 }
 
-.client__container {
-  position: relative;
-  isolation: isolate;
-}
-
-.client__bg {
-  position: absolute;
-  left: 75%;
-  top: 0;
-  transform: translate(-65%, -35%) rotate(-45deg);
-  height: 12rem;
-  width: unset;
-  aspect-ratio: 1;
-  object-fit: contain;
-}
-
-.client__card {
-  position: relative;
-  isolation: isolate;
-  margin-top: 4rem;
-  display: none;
-  animation: fadeEffect 1s;
-}
-
-.client__card.active {
-  display: block;
-}
-
-@keyframes fadeEffect {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.client__card img {
-  max-width: 400px;
-  border-radius: 2rem;
-  box-shadow: 30px -30px 0px rgba(0, 0, 0, 0.1);
-}
-
-.client__content {
-  padding: 2rem;
-  background-color: var(--white);
-  border-left: 5px solid var(--primary-color);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5rem);
-}
-
-.client__content h4 {
-  font-size: 2rem;
-  font-weight: 500;
-  color: var(--text-dark);
-}
-
-.client__content h5 {
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--primary-color);
-}
-
-.client__content p {
-  color: var(--text-light);
-}
-
-.client__btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.client__btns .btn {
-  padding: 10px 12px;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  background-color: var(--white);
-  border: 2px solid var(--primary-color);
-  border-radius: 100%;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-}
-
-.client__btns .btn:hover {
-  color: var(--white);
-  background-color: var(--primary-color);
-}
-
 .subscribe__container :is(.section__header, .section__description) {
   max-width: 600px;
   margin-inline: auto;
@@ -579,7 +476,7 @@ nav {
   padding: 5px;
   display: flex;
   align-items: center;
-  background-color: rgba(0, 100, 38, 0.418);
+  background-color: var(--secondary-shadow-color);
   border-radius: 10px;
 }
 
@@ -682,11 +579,7 @@ footer {
   text-align: center;
 }
 
-@media (width < 540px) {
-
-  .header__content h1 {
-    font-size: 3.6rem;
-  }
+@media (width > 200px) {
   .client__content {
     position: absolute;
     top: 50%;
@@ -703,10 +596,13 @@ footer {
   .footer__container {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .logout {
+    display: block;
+  }
 }
 
 @media (width > 540px) {
-  
   .client__content {
     position: absolute;
     top: 50%;
@@ -846,13 +742,18 @@ footer {
   .footer__col:nth-child(4) {
     grid-column: 6/8;
   }
+
+  .logout {
+    display: none;
+  }
 }
 
-@media (width > 1023px) {
+@media (width > 1024px) {
   .header__image {
     gap: 1.5rem;
     grid-auto-rows: 90px;
   }
+
   .logout {
     display: none;
   }

@@ -14,7 +14,64 @@
     <link rel="stylesheet" href="/css/home-page.css" />
     <link rel="shortcut icon" href="/assets/logo_no_bg.png" type="image/x-icon">
     <title>Casalinga Tours | Wellness Travel Body.Mind.Spirit</title>
-
+    <style>
+        #action_buttons {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            justify-content: space-between;
+        }
+        
+        #action_buttons a {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        #action_buttons a:first-child {
+            background: transparent;
+            color:  var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        #action_buttons a:first-child:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        #action_buttons a:last-child {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        #action_buttons a:last-child:hover {
+            background: var(--primary-color-dark);
+        }
+        
+        
+        
+        @media (max-width: 992px) {
+            
+            #action_buttons {
+                flex-direction: row;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            
+            #action_buttons a {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            
+            .popular__card__footer {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
   </head>
   <style>
     :root {
@@ -32,98 +89,39 @@
       color: var(--primary-color);
       filter: drop-shadow(4px 4px 10px var(--primary-shadow-color));
     }
+
+    .header__container .header__content .active {
+      color: var(--primary-color-dark);
+      filter: drop-shadow(4px 4px 10px var(--primary-shadow-color));
+      text-decoration: none;
+    }
   </style>
   <body>
-    <!-- NAVBAR -->
-    <nav>
-      <div class="nav__header">
-        <div class="nav__logo" >
-          <a href="#" style="display: flex; align-items: center;"><span><img src="/assets/logo_no_bg.png" alt="" style="width: 2.8rem;"></span>casalingatours</a>
-        </div>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="ri-menu-3-line"></i>
-        </div>
-      </div>
+    <%- include('../partials/navbar') %>
 
-      <% if (session.userId) { %>
-        
-        <!-- USER NAVBAR -->
-        <% if (session.userRole === 'customer') { %>
-          <ul class="nav__links" id="nav-links">
-            <li><a href="/about">About</a></li>
-            <li><a href="/tours">Leisures</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/bookings/my-bookings">My Bookings</a></li>
-            <li><a href="/user/dashboard">Dashboard</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li class="logout"><a href="/auth/logout">Logout</a></li>
-          </ul>
-          <div class="nav__btns">
-            <button class="btn"><a href="/auth/logout">Logout</a></button>
-          </div>
-        <% } %>
-
-        <!-- ADMIN NAVBAR -->
-        <% if (session.userRole === 'admin') { %>
-
-          <ul class="nav__links" id="nav-links">
-            <li><a href="/"  class="active">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/tours">Leisures</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/admin/bookings">Bookings</a></li>
-            <li><a href="/admin/dashboard">Admin</a></li>
-            <li class="logout"><a href="/auth/logout">Logout</a></li>
-          </ul>
-          <div class="nav__btns">
-            <button class="btn"><a href="/auth/logout">Logout</a></button>
-          </div>
-          <!-- <li><a href="/admin/dashboard">Admin</a></li> -->
-        <% } %>
-        <li style="display: none;"><a href="/auth/logout" >Logout (<%= session.userName %>)</a></li>
-
-      <% } else { %>
-        <ul class="nav__links" id="nav-links">
-          <li><a href="/"  class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="/tours">Leisures</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li class="logout"><a href="/auth/login">Login</a></li>
-        </ul>
-        <div class="nav__btns">
-          <button class="btn"><a href="/auth/login">Login</a></button>
-        </div>
-      <% } %>
-
-    </nav>
-
-    <!-- HEADER SECTIOIN -->
     <header class="section__container header__container" id="home">
       <div class="header__content">
-        <h1>Our Story Of <span>Wellness</span> & Adventure </h1>
+        <h1>Our story of <span class="active">wellness</span> and adventure.</h1>
         <p class="section__description">
           For over two decades, Casalinga Tours has been crafting transformative journeys that nourish the body, 
           mind, and spirit across Southern Africa's most breathtaking landscapes.
         </p>
         <form action="/">
           <div class="input__group">
-            <label for="location">Destination</label>
-            <input type="text" name="location" placeholder="Kruger, Okavango..." />
+            <label for="location">Location</label>
+            <input type="text" name="location" placeholder="Lakshadweep" />
           </div>
           <div class="input__group">
-            <label for="date">Travel Date</label>
-            <input type="text" name="date" placeholder="Select dates" />
+            <label for="date">Date</label>
+            <input type="text" name="date" placeholder="26 Mar, Fri" />
           </div>
           <div class="input__group">
-            <label for="price">Experience Type</label>
-            <input type="text" name="price" placeholder="e.g. Safari, Wine, Golf" />
+            <label for="price">Price</label>
+            <input type="text" name="price" placeholder="Rs. 42,000" />
           </div>
           <button class="btn"><i class="ri-search-line"></i></button>
         </form>
       </div>
-      
       <div class="header__image">
         <img src="/assets/yoga-2.jpg" alt="header" />
         <img src="/assets/yoga.jpg" alt="header" />
@@ -132,21 +130,20 @@
       </div>
     </header>
 
-    <!-- CHOOSE US SECTION -->
     <section class="section__container choose__container" id="about">
       <div class="choose__image">
-        <img src="/assets/hiking.jpg" alt="choose" />
+        <img src="/assets/golf-1.jpg" alt="choose" />
       </div>
       <div class="choose__content">
         <p class="section__subheader">Why Choose Us?</p>
-        <h2 class="section__header">Crafting Unforgettable African<span> Journeys</span></h2>
+        <h2 class="section__header">Crafting Unforgettable <span>Journeys</span>.</h2>
         <ul class="choose__list">
           <li>
             <span><i class="ri-verified-badge-line"></i></span>
             <div>
-              <h4>Two Decades of Excellence</h4>
+              <h4>Years Of Experience</h4>
               <p>
-                With over 20 years of creating bespoke Southern African experiences, 
+                With years of creating bespoke wellness experiences, 
                 our expertise ensures your journey is seamless and extraordinary.
               </p>
             </div>
@@ -154,7 +151,7 @@
           <li>
             <span><i class="ri-customer-service-2-line"></i></span>
             <div>
-              <h4>Personalized Service</h4>
+              <h4>Personalized Services</h4>
               <p>
                 Your dedicated travel consultant creates a completely customized itinerary 
                 based on your unique interests, pace, and preferences.
@@ -175,21 +172,22 @@
       </div>
     </section>
 
-    <!-- FAMOUS TOURS SECTION -->
     <section class="section__container popular__container" id="package">
-      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" class="popular__bg" />
+      <!-- <img src="assets/bg.png" alt="bg" class="popular__bg" /> -->
       <p class="section__subheader">Famous Tours</p>
-      <h2 class="section__header">Our Popular <span>Tours</span></h2>
+      <h2 class="section__header">Our Popular <span>Mindful & Wellness</span>Tours.</h2>
       <!-- Slider main container -->
       <div class="swiper">
+        
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
+        <% if (tours.length > 0) { %>
           <!-- Slides -->
           <% tours.forEach(function(tour) { %>
-            <div class="swiper-slide">
-              <div class="popular__card">
-                <img src="https://mhondoro.com/wp-content/uploads/2024/09/Safaris_Resized.webp" alt="popular" />
-                <div class="popular__content">
+          <div class="swiper-slide">
+            <div class="popular__card">
+              <img src="assets/popular-1.jpg" alt="popular" />
+              <div class="popular__content">
                   <div class="popular__rating">
                     <span><i class="ri-star-line"></i></span>
                     4.0(34 Reviews) 
@@ -208,129 +206,57 @@
                       <span><i class="ri-suitcase-3-line"></i></span> <%= tour.category %>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          <% }); %>
-          <div class="swiper-slide">
-            <div class="popular__card">
-              <img src="https://mhondoro.com/wp-content/uploads/2024/09/Safaris_Resized.webp" alt="popular" />
-              <div class="popular__content">
-                <div class="popular__rating">
-                  <span><i class="ri-star-line"></i></span>
-                  4.0(34) Reviews
-                </div>
-                <h4>Lakshadweep</h4>
-                <p><span>R 28,000/-</span> Per Person</p>
-                <div class="popular__card__footer">
-                  <div>
-                    <span><i class="ri-time-line"></i></span> 4 Day's
+                  <div class="popular__card__footer" id="action_buttons">
+                    <a href="/tours/<%= tour.id %>">view details</a>
+                    <!-- <div>
+                      <span><i class="ri-group-3-line"></i></span> 15+
+                    </div> -->
+                    <a href="/bookings/new?tour_id=<%= tour.id %>">book now</a>
                   </div>
-                  <!-- <div>
-                    <span><i class="ri-group-3-line"></i></span> 15+
-                  </div> -->
-                  <div>
-                    <span><i class="ri-map-pin-2-line"></i></span> Bushbugridge 
-                  </div>
-                </div>
               </div>
             </div>
           </div>
+          <% }); %>
+          <% } else { %>
+          <p>No tours available at the moment. Please check back later.</p>
+          <% } %>
         </div>
       </div>
     </section>
 
-    <!-- EXPERTISE SECTION -->
     <section class="section__container explore__container">
       <div class="explore__image">
         <img src="/assets/waterfall.jpg" alt="explore" />
       </div>
       <div class="explore__content">
-        <p class="section__subheader">Our Expertise</p>
+        <p class="section__subheader">Explore With Us</p>
         <h2 class="section__header">
-          Crafting <span>Extraordinary</span> African Journeys
+          Choose Dream Destinations & <span>We'll Help Your Explore.</span>
         </h2>
         <p class="section__description">
-          For over two decades, Casalinga Tours has specialized in creating bespoke luxury experiences across Southern Africa. 
-          Our deep connections and insider knowledge allow us to craft journeys that go beyond the ordinary, offering exclusive 
-          access to pristine wilderness, premier accommodations, and authentic cultural encounters.
+          For over two decades, Casalinga Tours has crafted luxury journeys across Southern Africa, 
+          offering exclusive access to stunning wilderness, top accommodations, and authentic cultural experiences.
         </p>
         <div class="explore__btn">
-          <button class="btn">Discover Our Story</button>
+          <button class="btn">About Us</button>
         </div>
         <div class="explore__grid">
           <div>
-            <h4>20+</h4>
-            <p>Years Of<br />Excellence</p>
+            <h4>2+</h4>
+            <p>Years<br />Experience</p>
           </div>
           <div>
-            <h4>6</h4>
-            <p>Southern African<br />States</p>
+            <h4>67+</h4>
+            <p>Destinations<br />Celebrations</p>
           </div>
           <div>
-            <h4>98%</h4>
-            <p>Client<br />Satisfaction</p>
+            <h4>320+</h4>
+            <p>Happy<br />Customers</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section class="section__container client__container">
-      <!-- <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjNGE5ZjhhIiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=" alt="bg" id="bubble__" class="client__bg" /> -->
-      <p class="section__subheader">What Our Client Say's?</p>
-      <h2 class="section__header">Client <span>Testimonials</span></h2>
-      <div class="client__card active">
-        <img src="/assets/client-1.jpg" alt="client" />
-        <div class="client__content">
-          <h4>Emma Johnson</h4>
-          <h5>Travel Blogger</h5>
-          <p>
-            This travel platform turned my bucket list dreams into reality! The
-            booking process was seamless, and their team provided excellent
-            guidance on must-visit spots. Every step felt effortless, and I
-            can't wait to plan my next adventure with them. Highly recommended!
-          </p>
-        </div>
-      </div>
-      <div class="client__card">
-        <img src="/assets/client-2.jpg" alt="client" />
-        <div class="client__content">
-          <h4>Sophia Lee</h4>
-          <h5>Software Engineer</h5>
-          <p>
-            Traveling with this service was a delight! The flexible booking
-            options gave me the freedom to plan at my own pace, and the detailed
-            itineraries ensured I didn't miss anything important. I felt like
-            they genuinely cared about creating the perfect travel experience
-            for me. Absolutely wonderful!
-          </p>
-        </div>
-      </div>
-      <div class="client__card">
-        <img src="/assets/client-3.jpg" alt="client" />
-        <div class="client__content">
-          <h4>Michael Roberts</h4>
-          <h5>Photographer</h5>
-          <p>
-            As a photographer, finding picturesque locations is key, and this
-            platform exceeded my expectations. They not only made booking easy
-            but also helped me discover some incredible hidden gems. Their
-            attention to detail made my journey unforgettable and hassle-free!
-          </p>
-        </div>
-      </div>
-      <div class="/client__btns">
-        <button class="btn" id="prev">
-          <i class="ri-arrow-left-line"></i>
-        </button>
-        <button class="btn" id="next">
-          <i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
-    </section>
-
-    <!-- SUBSCRIBE SECTION -->
     <section class="section__container subscribe__container" id="contact">
       <h2 class="section__header">
         Subscribe To Get The Latest News <span>About Us</span>
@@ -346,78 +272,8 @@
       </form>
     </section>
 
-    <!-- FOOTER SECTION -->
-    <footer>
-      <div class="section__container footer__container">
-        <div class="footer__col">
-          <div class="footer__logo">
-            <a href="#">casalingatours</a>
-          </div>
-          <p>
-            Explore the world with us! Connect through our social media
-            channels, find quick links to essential resources, and access 24/7
-            support to make your travel planning effortless.
-          </p>
-          <ul class="footer__socials">
-            <li>
-              <a href="#"><i class="ri-facebook-fill"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="ri-twitter-fill"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="ri-instagram-line"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Services</h4>
-          <ul class="footer__links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Destinations</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <h4>Instagram</h4>
-          <div class="footer__col__flex">
-            <img src="/assets/golf-1.jpg" alt="instagram" />
-            <img src="/assets/canoeing-1.jpg" alt="instagram" />
-            <img src="/assets/picnic-1.jpg" alt="instagram" />
-            <img src="/assets/quad-1.jpg" alt="instagram" />
-            <img src="/assets/waterfall.jpg" alt="instagram" />
-            <img src="/assets/hiking-1.jpg" alt="instagram" />
-          </div>
-        </div>
-        <div class="footer__col">
-          <h4>Contact</h4>
-          <ul class="footer__links">
-            <li>
-              <a href="#">
-                <span><i class="ri-phone-fill"></i></span> +91 0987654321
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span><i class="ri-map-pin-fill"></i></span> New Delhi, India
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span><i class="ri-mail-fill"></i></span> info@carrental
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bar">
-        Copyright © 2025 CodeNexus. All rights reserved.
-      </div>
-    </footer>
+    <%- include('../partials/footer') %>
 
-    <!-- SCRIPTS -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/js/home-page.js"></script>

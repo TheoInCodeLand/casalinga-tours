@@ -1,0 +1,66 @@
+    <style>
+        
+    </style>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo" >
+          <a href="#" style="display: flex; align-items: center;"><span><img src="/assets/logo_no_bg.png" alt="" style="width: 2.8rem;"></span>casalingatours</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+
+      <% if (session.userId) { %>
+        
+        <!-- USER NAVBAR -->
+        <% if (session.userRole === 'customer') { %>
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/bookings/my-bookings">My Bookings</a></li>
+            <li><a href="/user/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="logout"><a href="/auth/logout">Logout</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+        <% } %>
+
+        <!-- ADMIN NAVBAR -->
+        <% if (session.userRole === 'admin') { %>
+
+          <ul class="nav__links" id="nav-links">
+            <li><a href="/"  class="active">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/tours">Leisures</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/admin/bookings">Bookings</a></li>
+            <li><a href="/admin/dashboard">Admin</a></li>
+            <li class="logout"><a href="/auth/logout">Logout</a></li>
+          </ul>
+          <div class="nav__btns">
+            <button class="btn"><a href="/auth/logout">Logout</a></button>
+          </div>
+          <!-- <li><a href="/admin/dashboard">Admin</a></li> -->
+        <% } %>
+        <li style="display: none;"><a href="/auth/logout" >Logout (<%= session.userName %>)</a></li>
+
+      <% } else { %>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="/"  class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="/tours">Leisures</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li class="logout"><a href="/auth/login">Login</a></li>
+        </ul>
+        <div class="nav__btns">
+          <button class="btn"><a href="/auth/login">Login</a></button>
+        </div>
+      <% } %>
+
+    </nav>
